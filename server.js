@@ -1,18 +1,21 @@
-console.log("radhe radhe");
+const express = require("express");
+const app = express();
+console.log(app);
 
-var os = require("os");
-var fs = require("fs");
-var _ = require("lodash");
-var fnImport = require("./add.js");
-console.log(os.userInfo().username);
-fs.appendFile(
-  "firstMessage.txt",
-  "Hello " + os.userInfo().username + "!\n",
-  () => console.log("file is created")
-);
+app.get("/", function (req, res) {
+  res.send("hello world");
+});
 
-console.log(fnImport.add(200, 300));
+app.get("/idli", (req, res) => {
+  var customized_idli = {
+    name: "Rava idli",
+    size: "10cm diameter",
+    is_sambhar: true,
+    is_chutney: false,
+  };
+  res.send(customized_idli);
+});
 
-const arr = [1, 1, 2, 3, 4, 3, 4, "cheeku", "chehak"];
-
-console.log(_.uniq(arr));
+app.listen(3000, () => {
+  console.log("listening on port 3000");
+});
