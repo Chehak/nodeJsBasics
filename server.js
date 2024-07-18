@@ -1,20 +1,19 @@
 const express = require("express");
 const app = express();
-console.log(app);
+const db = require("./db");
+const bodyParser = require("body-parser");
+const Person = require("./models/Person");
+app.use(bodyParser.json());
 
 app.get("/", function (req, res) {
   res.send("hello world");
 });
 
-app.get("/idli", (req, res) => {
-  var customized_idli = {
-    name: "Rava idli",
-    size: "10cm diameter",
-    is_sambhar: true,
-    is_chutney: false,
-  };
-  res.send(customized_idli);
-});
+const personRoutes = require('./routes/PersonRoutes');
+app.use('/person',personRoutes);
+
+const menuItemsRoute = require('./routes/MenuItemsRoute');
+app.use('/menu',menuItemsRoute);
 
 app.listen(3000, () => {
   console.log("listening on port 3000");
