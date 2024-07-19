@@ -3,6 +3,7 @@ const app = express();
 const db = require("./db");
 const bodyParser = require("body-parser");
 const Person = require("./models/Person");
+
 app.use(bodyParser.json());
 
 app.get("/", function (req, res) {
@@ -15,6 +16,7 @@ app.use('/person',personRoutes);
 const menuItemsRoute = require('./routes/MenuItemsRoute');
 app.use('/menu',menuItemsRoute);
 
-app.listen(3000, () => {
+const port = process.env.PORT || 3000;
+app.listen(port, () => {
   console.log("listening on port 3000");
 });
